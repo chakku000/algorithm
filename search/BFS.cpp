@@ -44,6 +44,7 @@ Dist& bfs(const Maze& maze,int H,int W,Dist& dist,int sx,int sy, char NG){
 
 /*
  * validate ATC001 A (距離については未検証)
+ * validate ABC007 C (距離OK)
  */
 
 int main(){
