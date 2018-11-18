@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i,n) for(int i=0;i<(int)(n);i++)
+/*
+ * BFSで盤面の始点から到達可能な場所を調べる
+ */
 
 
 constexpr int INF = std::numeric_limits<int>::max()/3;
