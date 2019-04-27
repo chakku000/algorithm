@@ -6,6 +6,7 @@ using namespace std;
 /*
  * 最小費用流
  * O(FVE)
+ * 注意 :: この実装はOne Shot. min_cost_flowの内部でGに対する変更があるので2回以上呼び出すと間違った出力になる
  */
 struct MinCostFlow{
     const int inf = std::numeric_limits<int>::max()/3;
