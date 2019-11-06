@@ -29,8 +29,8 @@ struct Imos2D{
 
     /* 出力: 左下が(0,0) */
     void print(){
-        for(int y=4*K-1;y>=0;y--){
-            for(int x=0;x<4*K;x++){
+        for(int y=w-1;y>=0;y--){
+            for(int x=0;x<h;x++){
                 cerr << tbl[x][y] << " ";
             }
             cerr << "\n";
