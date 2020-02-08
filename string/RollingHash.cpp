@@ -23,38 +23,38 @@ struct fin{ fin(){ cin.tie(0); ios::sync_with_stdio(false); } } fin_;
 
 struct RollingHash{
     static const int hash_size = 2;
-    vector<long long> mod{999999937LL, 1000000007LL, 1000000021LL, 1000000103LL};
+    vector<long long> mod{999999937LL, 1000000007LL};
     const long long base = 9973;
-    string s;
-    vector<long long> pw[hash_size];
-    vector<long long> hs[hash_size]; // hs[i] := s[0,i)のhash値
-    RollingHash(const string s_){
-        s = s_;
+    vector<long long> pw[hash_size], hs[hash_size];
+    RollingHash(const string& s){
         int n = s.size();
         for(int i=0;i<hash_size;i++){
             pw[i].resize(n+1);
             pw[i][0] = 1;
             for(int j=0;j<n;j++) pw[i][j+1] = pw[i][j] * base % mod[i];
-
+ 
             hs[i].resize(n+1);
             hs[i][0] = 0;
-            for(int j=0;j<n;j++) hs[i][j+1] = ((hs[i][j] * base) % mod[i] + s[j]) % mod[i];
+            for(int j=0;j<n;j++){
+                hs[i][j+1] = hs[i][j]*base%mod[i]+s[j];
+                if(hs[i][j+1]>=mod[i]) hs[i][j+1] -= mod[i];
+            }
         }
     }
-
+ 
     long long get(int l,int r,int i) const {
-        long long m = mod[i];
-        return ((hs[i][r] - (hs[i][l]*pw[i][r-l])%m)%m+m)%m;
+        long long ret = hs[i][r] + mod[i] - (hs[i][l]*pw[i][r-l]%mod[i]);
+        if(ret >= mod[i]) ret -= mod[i];
+        return ret;
     }
-
+ 
     bool match(int l1, int r1, int l2, int r2) const {
         for(int i=0;i<hash_size;i++){
             if(get(l1,r1,i) != get(l2,r2,i)) return false;
         }
         return true;
     }
-
-    /* 他の文字列のHashと比較 */
+ 
     bool match(int l, int r,const RollingHash& p, int pl, int pr) const {
         for(int i=0;i<hash_size;i++){
             if(get(l,r,i) != p.get(pl,pr,i)) return false;
@@ -78,3 +78,5 @@ int main(){
         }
     }
 }
+
+// ABC 141-E
