@@ -42,3 +42,4 @@ struct UnionFind{
 
 // Verify
 // https://atcoder.jp/contests/abc120/tasks/abc120_d
+// https://atcoder.jp/contests/kupc2019/tasks/kupc2019_b
